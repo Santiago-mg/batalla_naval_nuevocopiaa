@@ -16,11 +16,11 @@ class alerta_jugador1(Popup):
         self.size_hint = (None, None)
         self.size = (300, 200)
         
-        content_layout = BoxLayout(orientation='vertical')
+        contenido_caja = BoxLayout(orientation='vertical')
         
         mensaje_alerta = Label(text='El jugador 1 ha ganado')
-        content_layout.add_widget(mensaje_alerta)
-        self.content = content_layout
+        contenido_caja.add_widget(mensaje_alerta)
+        self.content = contenido_caja
 class alerta_jugador2(Popup):
     def __init__(self, **kwargs):
         super(alerta_jugador2, self).__init__(**kwargs)
@@ -28,11 +28,11 @@ class alerta_jugador2(Popup):
         self.size_hint = (None, None)
         self.size = (300, 200)
         
-        content_layout = BoxLayout(orientation='vertical')
+        contenido_caja = BoxLayout(orientation='vertical')
         
         mensaje_alerta = Label(text='El jugador 2 ha ganado')
-        content_layout.add_widget(mensaje_alerta)
-        self.content = content_layout
+        contenido_caja.add_widget(mensaje_alerta)
+        self.content = contenido_caja
 class MyPopup_impacto(Popup):
     def __init__(self, **kwargs):
         super(MyPopup_impacto, self).__init__(**kwargs)
@@ -42,8 +42,8 @@ class MyPopup_impacto(Popup):
         
         content_layout = BoxLayout(orientation='vertical')
         
-        message_label = Label(text='Barco destruido')
-        content_layout.add_widget(message_label)
+        mensaje_barco_destruido = Label(text='Barco destruido')
+        content_layout.add_widget(mensaje_barco_destruido)
         self.content = content_layout         
 
 class GameScreen(Screen):
@@ -51,10 +51,10 @@ class GameScreen(Screen):
         super(GameScreen, self).__init__(**kwargs)
         
         # Initialize the game boards for both players
-        self.player1_board = TableroBatallaNaval(10, 10)
-        self.player1_board.colocar_naves()
-        self.player2_board = TableroBatallaNaval(10, 10)
-        self.player2_board.colocar_naves()
+        self.Tablero_Jugador1 = TableroBatallaNaval(10, 10)
+        self.Tablero_Jugador1.colocar_naves()
+        self.Tablero_Jugador2 = TableroBatallaNaval(10, 10)
+        self.Tablero_Jugador2.colocar_naves()
 
 
         ContenedorA= BoxLayout(orientation= "vertical")
@@ -64,7 +64,7 @@ class GameScreen(Screen):
 
         Contenedor1 = BoxLayout(orientation='vertical')
 
-        # Create buttons for player 1's board
+        #Crear botones del mapa del Jugador 1
         for numero_fila in range(10):
             fila = BoxLayout(orientation="horizontal")
             for numero_columna in range(10):
@@ -73,8 +73,8 @@ class GameScreen(Screen):
                                  )
                 casilla.fila = numero_fila
                 casilla.columna = numero_columna
-                casilla.bind(on_press=self.player1_fire)
-                if self.player2_board.buscar_barco():
+                casilla.bind(on_press=self.Disparo_Jugador1)
+                if self.Tablero_Jugador2.buscar_barco():
                     casilla.bind(on_press=self.show_popup)
                 fila.add_widget(casilla)
             Contenedor1.add_widget(fila)
@@ -85,11 +85,11 @@ class GameScreen(Screen):
         popup = MyPopup_impacto()
         popup.open()
     
-    def player1_fire(self, instance):
-        # Fire shot on player 2's board
-        result = self.player2_board.disparar(instance.fila, instance.columna, self.player2_board.tablero)
+    def Disparo_Jugador1(self, instance):
+        
+        result = self.Tablero_Jugador2.disparar(instance.fila, instance.columna, self.Tablero_Jugador2.tablero)
 
-        # Update button text to reflect the shot result
+        
         if result == 'X':
             instance.text = 'X'
             instance.background_color= (255, 0, 0, 1)
@@ -100,7 +100,7 @@ class GameScreen(Screen):
             instance.disabled= True
 
         # Check for sunk ships
-        barco_hundido = self.player2_board.barco_hundido()
+        barco_hundido = self.Tablero_Jugador2.barco_hundido()
         if barco_hundido :
             self.show_popup2()
 
@@ -111,9 +111,9 @@ class GameScreen(Screen):
 
 
 class CambioDePantalla(Screen):
-    def __init__(self, player1_board, **kwargs):
+    def __init__(self, Tablero_Jugador1, **kwargs):
         super(CambioDePantalla, self).__init__(**kwargs)
-        self.player1_board = player1_board
+        self.Tablero_Jugador1 = Tablero_Jugador1
 
         ContenedorB= BoxLayout(orientation="vertical")
        
@@ -122,6 +122,7 @@ class CambioDePantalla(Screen):
 
         Contenedor2 = BoxLayout(orientation='vertical')
 
+        #Crear botones del mapa del Jugador 2
         for numero_fila in range(10):
             fila = BoxLayout(orientation="horizontal")
             for numero_columna in range(10):
@@ -130,8 +131,8 @@ class CambioDePantalla(Screen):
                                  )
                 casilla.fila = numero_fila
                 casilla.columna = numero_columna
-                casilla.bind(on_press=self.player2_fire)
-                if self.player1_board.buscar_barco():
+                casilla.bind(on_press=self.Disparo_Jugador2)
+                if self.Tablero_Jugador1.buscar_barco():
                     casilla.bind(on_press=self.show_popup)
                 fila.add_widget(casilla)
             Contenedor2.add_widget(fila)
@@ -142,9 +143,9 @@ class CambioDePantalla(Screen):
         popup = MyPopup_impacto()
         popup.open()
 
-    def player2_fire(self, instance):
+    def Disparo_Jugador2(self, instance):
 
-        result = self.player1_board.disparar(instance.fila, instance.columna, self.player1_board.tablero)
+        result = self.Tablero_Jugador1.disparar(instance.fila, instance.columna, self.Tablero_Jugador1.tablero)
 
  
         if result == 'X':
@@ -155,7 +156,7 @@ class CambioDePantalla(Screen):
             instance.text = ' '
             instance.background_color=(0, 255, 255, 0.5) 
             instance.disabled= True
-        barco_hundido =self.player1_board.barco_hundido()
+        barco_hundido =self.Tablero_Jugador1.barco_hundido()
         if barco_hundido:
             self.show_popup2()
 
@@ -171,7 +172,7 @@ class BattleshipApp(App):
 
         # Create instances of screens
         Pantalla1 = GameScreen(name='Turno_Jugador1')
-        Pantalla2 = CambioDePantalla(name='CambioDePantalla', player1_board=Pantalla1.player1_board)
+        Pantalla2 = CambioDePantalla(name='CambioDePantalla', Tablero_Jugador1=Pantalla1.Tablero_Jugador1)
 
         sm.add_widget(Pantalla1)
         sm.add_widget(Pantalla2)
@@ -180,3 +181,4 @@ class BattleshipApp(App):
 
 if __name__ == '__main__':
     BattleshipApp().run()
+
