@@ -388,16 +388,16 @@ class TableroBatallaNaval:
                 cont_columnas += 1
         return cont_columnas
     
-    def disparar(self,pos_fila, pos_columna, tablero):
-        if tablero[pos_fila-1][pos_columna-1] == Fore.BLACK  + 'X' + Style.RESET_ALL or tablero[pos_fila-1][pos_columna-1] == Fore.BLUE + 'N' + Style.RESET_ALL:
+    def disparar(self,posicion_fila, posicion_columna, tablero):
+        if tablero[posicion_fila-1][posicion_columna-1] == Fore.BLACK  + 'X' + Style.RESET_ALL or tablero[posicion_fila-1][posicion_columna-1] == Fore.BLUE + 'N' + Style.RESET_ALL:
             print("Ya disparaste en esta posicion")
-        elif tablero[pos_fila-1][pos_columna-1] == Fore.RED + 'B' + Style.RESET_ALL or tablero[pos_fila-1][pos_columna-1] == Fore.YELLOW + 'B' + Style.RESET_ALL or tablero[pos_fila-1][pos_columna-1] == Fore.GREEN + 'B' + Style.RESET_ALL :
+        elif tablero[posicion_fila-1][posicion_columna-1] == Fore.RED + 'B' + Style.RESET_ALL or tablero[posicion_fila-1][posicion_columna-1] == Fore.YELLOW + 'B' + Style.RESET_ALL or tablero[posicion_fila-1][posicion_columna-1] == Fore.GREEN + 'B' + Style.RESET_ALL :
             print("¡Impacto!")
-            tablero[pos_fila-1][pos_columna-1] = Fore.BLACK + 'X' + Style.RESET_ALL  # 'X' representa un impacto en un barco
+            tablero[posicion_fila-1][posicion_columna-1] = Fore.BLACK + 'X' + Style.RESET_ALL  # 'X' representa un impacto en un barco
             return 'X'
         else:
             print("¡Agua!")
-            tablero[pos_fila-1][pos_columna-1] = Fore.BLUE + 'N' + Style.RESET_ALL  # 'M' representa un disparo al agua
+            tablero[posicion_fila-1][posicion_columna-1] = Fore.BLUE + 'N' + Style.RESET_ALL  # 'M' representa un disparo al agua
             return "N"
 
         
