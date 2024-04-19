@@ -389,7 +389,7 @@ class TableroBatallaNaval:
         return cont_columnas
     
     def disparar(self,pos_fila, pos_columna, tablero):
-        if tablero[pos_fila-1][pos_columna-1] == Fore.BLACK  + 'X' + Style.RESET_ALL:
+        if tablero[pos_fila-1][pos_columna-1] == Fore.BLACK  + 'X' + Style.RESET_ALL or tablero[pos_fila-1][pos_columna-1] == Fore.BLUE + 'N' + Style.RESET_ALL:
             print("Ya disparaste en esta posicion")
         elif tablero[pos_fila-1][pos_columna-1] == Fore.RED + 'B' + Style.RESET_ALL or tablero[pos_fila-1][pos_columna-1] == Fore.YELLOW + 'B' + Style.RESET_ALL or tablero[pos_fila-1][pos_columna-1] == Fore.GREEN + 'B' + Style.RESET_ALL :
             print("¡Impacto!")
