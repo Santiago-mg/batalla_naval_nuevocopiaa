@@ -403,12 +403,26 @@ class TableroBatallaNaval:
         
 
     def barco_hundido(self):
+        barco_hundido = False
+        barcos_a_eliminar = []
+
         for nombre_barco, coordenadas in self.naves.items():
+            barco_intacto = True
             for fila, columna in coordenadas:
                 if self.tablero[fila][columna] != Fore.BLACK + 'X' + Style.RESET_ALL:
-                    break  # Si encontramos una parte del barco no impactada, pasamos al siguiente barco
-            else:
+                    barco_intacto = False                    
+                    break
+
+            if barco_intacto:
                 print("¡El barco", nombre_barco, "está hundido!")
+                barcos_a_eliminar.append(nombre_barco)
+                barco_hundido = True
+
+        # Eliminar barcos hundidos del diccionario
+        for nombre_barco in barcos_a_eliminar:
+            del self.naves[nombre_barco]
+
+        return barco_hundido
     def buscar_barco(self):
         for fila in self.tablero:
             for celda in fila:
@@ -439,5 +453,5 @@ def ejecutarjuego():
 
 
 if __name__ == '__main__':
-    ejecutarjuego().run()
+    ejecutarjuego()
 
