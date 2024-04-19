@@ -9,29 +9,29 @@ import sys
 sys.path.append("src")
 
 from Batalla.Juego_principal import TableroBatallaNaval
-class MyPopup_jugador1(Popup):
+class alerta_jugador1(Popup):
     def __init__(self, **kwargs):
-        super(MyPopup_jugador1, self).__init__(**kwargs)
+        super(alerta_jugador1, self).__init__(**kwargs)
         self.title = 'Alerta'
         self.size_hint = (None, None)
         self.size = (300, 200)
         
         content_layout = BoxLayout(orientation='vertical')
         
-        message_label = Label(text='El jugador 1 ha ganado')
-        content_layout.add_widget(message_label)
+        mensaje_alerta = Label(text='El jugador 1 ha ganado')
+        content_layout.add_widget(mensaje_alerta)
         self.content = content_layout
-class MyPopup_jugador2(Popup):
+class alerta_jugador2(Popup):
     def __init__(self, **kwargs):
-        super(MyPopup_jugador2, self).__init__(**kwargs)
+        super(alerta_jugador2, self).__init__(**kwargs)
         self.title = 'Alerta'
         self.size_hint = (None, None)
         self.size = (300, 200)
         
         content_layout = BoxLayout(orientation='vertical')
         
-        message_label = Label(text='El jugador 2 ha ganado')
-        content_layout.add_widget(message_label)
+        mensaje_alerta = Label(text='El jugador 2 ha ganado')
+        content_layout.add_widget(mensaje_alerta)
         self.content = content_layout
 class MyPopup_impacto(Popup):
     def __init__(self, **kwargs):
@@ -106,7 +106,7 @@ class GameScreen(Screen):
 
         self.manager.current = 'CambioDePantalla'
     def show_popup(self, instance):
-        popup = MyPopup_jugador1()
+        popup = alerta_jugador1()
         popup.open() 
 
 
@@ -162,7 +162,7 @@ class CambioDePantalla(Screen):
         self.manager.current = 'Turno_Jugador1'
   
     def show_popup(self, instance):
-        popup = MyPopup_jugador2()
+        popup = alerta_jugador2()
         popup.open()
 
 class BattleshipApp(App):
@@ -179,5 +179,4 @@ class BattleshipApp(App):
         return sm
 
 if __name__ == '__main__':
-    BattleshipApp().run()
     BattleshipApp().run()
