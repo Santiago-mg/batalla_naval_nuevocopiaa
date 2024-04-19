@@ -11,6 +11,9 @@ Este archivo contiene la implementación del juego de Batalla Naval. Aquí se de
 pruebas.py
 Este archivo contiene pruebas unitarias para validar el funcionamiento del juego. Se utilizan las bibliotecas unittest y main para realizar las pruebas en la clase TableroBatallaNaval.
 
+Interfazz.py
+interfaz.py proporciona una experiencia interactiva para jugar al clásico juego de Batalla Naval en una interfaz gráfica de usuario.
+
 Funcionalidades principales
 Colocar Naves: El método colocar_naves() de la clase TableroBatallaNaval coloca aleatoriamente barcos de diferentes tamaños en el tablero.
 Disparar: El método disparar() permite al jugador disparar a una posición específica del tablero y determina si hubo un impacto en un barco o si fue un disparo al agua.
@@ -23,24 +26,11 @@ random: Utilizada para la generación de números aleatorios.
 colorama: Utilizada para imprimir texto con colores en la consola.
 Para instalar las dependencias, puedes utilizar el siguiente comando:
 
-bash
+Asegurate de tener instaladas las bibliotecas de colorama y kivy. Si no las tienes instaladas puedes ejecutar el siguiente codigo en la terminal de python:
 pip install colorama
+pip install kivy
 
 Ejecución
-Para ejecutar el juego de Batalla Naval, simplemente ejecuta el archivo main.py. A continuación, se muestra un ejemplo de cómo se puede usar el código:
-
-
-# Crear un tablero de Batalla Naval de 10x10
-tablero = main.TableroBatallaNaval(10, 10)
-
-# Colocar los barcos en el tablero
-tablero.colocar_naves()
-
-# Imprimir el estado inicial del tablero
-tablero.imprimir_tablero()
-
-# Disparar a una posición específica
-tablero.disparar(3, 2)
-
-# Imprimir el estado del tablero después del disparo
-tablero.imprimir_tablero()
+Navega hasta el directorio donde se encuentra el código.
+Ejecuta el script principal interfaz.py.
+Se abrirá una ventana donde podrás jugar. Sigue las instrucciones en pantalla para jugar como Jugador 1 y Jugador 2.
